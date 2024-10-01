@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+    <config>
+        <hostname>qiisqwww@DESKTOP_XDXD</hostname>
+        <fs_path>../settings/filesystem.tar</fs_path>
+        <log_file_path>../settings/log.csv</log_file_path>
+        <start_script_path>../settings/start_script.txt</start_script_path>
+    </config>

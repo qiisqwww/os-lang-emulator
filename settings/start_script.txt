@@ -1,0 +1,10 @@
+cd home/user/documents
+ls
+uname
+tail file1.txt
+cd ..
+cd music
+ls
+cd pictures
+ls
+exit
