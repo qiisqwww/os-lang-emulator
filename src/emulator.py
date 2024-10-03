@@ -26,7 +26,6 @@ class Emulator:
 
         self.load_file_system()
 
-
     def load_file_system(self) -> None:
         with tarfile.open(self._fs_path, 'r') as tar:
             for member in tar.getmembers():

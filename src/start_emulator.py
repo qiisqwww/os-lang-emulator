@@ -1,7 +1,11 @@
 from xml.etree import ElementTree as ET
+from pathlib import Path
 
 from src.emulator import Emulator
 from src.emulator_gui import EmulatorGUI
+
+
+ROOT_PATH = str(Path(__file__).resolve().parents[1])
 
 
 def load_config(config_path):
