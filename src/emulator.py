@@ -1,11 +1,15 @@
 import tarfile
 import platform
+from pathlib import Path
 
 from src.logger import Logger
 
 __all__ = [
     "Emulator"
 ]
+
+
+ROOT_PATH = str(Path(__file__).resolve().parents[1])
 
 
 class Emulator:
@@ -126,14 +130,17 @@ class Emulator:
         else:
             return self.current_directory + filepath
 
-    def tail(self, filepath):
+    def tail(self, filepath: str):
+        print(ROOT_PATH)
+
         if filepath not in self._file_system:
             filepath = self._get_absolute_filepath(filepath)
             if filepath not in self._file_system:
                 return f"No such file or directory: '{filepath}'"
 
         res = "Last 10 lines of file:\n"
-        with open("../" + filepath[1:], 'r') as f:
+        filepath = ROOT_PATH + "\\" + filepath[1:].replace("/", "\\")
+        with open(filepath, 'r') as f:
             lines = f.readlines()[-10:]
             res += '\n'.join(lines)
 
