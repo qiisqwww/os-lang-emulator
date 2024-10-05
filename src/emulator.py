@@ -67,9 +67,11 @@ class Emulator:
         elif cmd == "uname":
             self.logger.write("uname command input")
             return self.uname()
-        elif cmd == "tail":
+        elif cmd == "tail" and len(command) > 1:
             self.logger.write("tail command input")
-            return self.tail(command[1] if len(command) > 1 else '')
+            return self.tail(command[1])
+        elif cmd == "tail":
+            return f"Must input path for '{cmd}' command."
         else:
             return f"Command '{cmd}' not found."
 
@@ -131,17 +133,20 @@ class Emulator:
             return self.current_directory + filepath
 
     def tail(self, filepath: str):
-        print(ROOT_PATH)
-
         if filepath not in self._file_system:
             filepath = self._get_absolute_filepath(filepath)
             if filepath not in self._file_system:
                 return f"No such file or directory: '{filepath}'"
 
-        res = "Last 10 lines of file:\n"
-        filepath = ROOT_PATH + "\\" + filepath[1:].replace("/", "\\")
-        with open(filepath, 'r') as f:
-            lines = f.readlines()[-10:]
-            res += '\n'.join(lines)
+        last_ten_lines = "Last 10 lines of file:\n"
+        with tarfile.open(self._fs_path, 'r') as tar:
+            file_member = tar.getmember(filepath[1:])
+            file = tar.extractfile(file_member)
 
-        return res
+            if not file:
+                return f"No such file: '{filepath}'"
+
+            content = file.read().decode("utf-8").split("\n")
+            last_ten_lines += '\n'.join(content[-10:])
+
+        return last_ten_lines
