@@ -19,10 +19,15 @@ class EmulatorGUI:
         self._window = tk.Tk()
         self._window.title(f"{self.emulator.hostname} Emulator")
 
-        self._text_area = scrolledtext.ScrolledText(self._window, wrap=tk.WORD)
+        self._text_area = scrolledtext.ScrolledText(
+            self._window,
+            wrap=tk.WORD,
+            bg="black",
+            fg="white"
+        )
         self._text_area.pack(expand=True, fill='both')
 
-        self._input_area = tk.Entry(self._window)
+        self._input_area = tk.Entry(self._window, bg="black", fg="white")
         self._input_area.pack(fill='x')
         self._input_area.bind("<Return>", self.run_command)
         self._input_area.focus_set()
