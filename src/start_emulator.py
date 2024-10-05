@@ -22,7 +22,7 @@ def load_config(config_path):
 
 
 def start_emulator():
-    config = load_config('../settings/config.xml')
+    config = load_config('settings/config.xml')
 
     emulator = Emulator(config)
     gui = EmulatorGUI(emulator)

@@ -6,7 +6,5 @@ from src.emulator import Emulator
 
 @pytest.fixture()
 def emulator() -> Emulator:
-    config = load_config(f'{ROOT_PATH}/settings/config.xml')
-    config['log_file_path'] = f'{ROOT_PATH}/settings/log.csv'
-    config['fs_path'] = f'{ROOT_PATH}/settings/filesystem.tar'
+    config = load_config('settings/config.xml')
     return Emulator(config)
